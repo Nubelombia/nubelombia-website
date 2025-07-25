@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
-    <link rel="stylesheet" href="/src/styles.css" />
-    <script type="module" src="/src/main.js"></script>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,15 +41,33 @@
         }
 
         .logo {
+            display: flex;
+            align-items: center;
             font-size: 1.8rem;
             font-weight: bold;
             color: #00d4ff;
             text-decoration: none;
             transition: transform 0.3s ease;
+            gap: 12px;
         }
 
         .logo:hover {
             transform: scale(1.05);
+        }
+
+        .logo-image {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            object-fit: contain;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover .logo-image {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(5deg);
         }
 
         .nav-links {
@@ -91,38 +108,66 @@
 
         .shape {
             position: absolute;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
             animation: float 6s ease-in-out infinite;
+            color: rgba(255, 255, 255, 0.8);
         }
 
         .shape:nth-child(1) {
-            width: 80px;
-            height: 80px;
-            top: 20%;
+            top: 15%;
             left: 10%;
             animation-delay: 0s;
+            font-size: 2.5rem;
         }
 
         .shape:nth-child(2) {
-            width: 120px;
-            height: 120px;
             top: 60%;
-            right: 10%;
+            right: 8%;
             animation-delay: 2s;
+            font-size: 3rem;
         }
 
         .shape:nth-child(3) {
-            width: 60px;
-            height: 60px;
-            bottom: 20%;
-            left: 20%;
+            bottom: 25%;
+            left: 15%;
             animation-delay: 4s;
+            font-size: 2rem;
+        }
+
+        .shape:nth-child(4) {
+            top: 25%;
+            right: 25%;
+            animation-delay: 1s;
+            font-size: 2.8rem;
+        }
+
+        .shape:nth-child(5) {
+            bottom: 15%;
+            right: 15%;
+            animation-delay: 3s;
+            font-size: 2.2rem;
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg) scale(1); 
+                opacity: 0.6;
+            }
+            25% { 
+                transform: translateY(-15px) rotate(5deg) scale(1.05); 
+                opacity: 0.8;
+            }
+            50% { 
+                transform: translateY(-30px) rotate(0deg) scale(1.1); 
+                opacity: 1;
+            }
+            75% { 
+                transform: translateY(-15px) rotate(-5deg) scale(1.05); 
+                opacity: 0.8;
+            }
         }
 
         .hero-content h1 {
@@ -480,7 +525,10 @@
 <body>
     <nav>
         <div class="nav-container">
-            <a href="#" class="logo">Nubelombia</a>
+            <a href="#" class="logo">
+                <img src="images/nubelombialogo.PNG" alt="Logo" class="logo-image">
+                <span>Nubelombia</span>
+            </a>
             <ul class="nav-links">
                 <li><a href="#inicio">Inicio</a></li>
                 <li><a href="#about">Nosotros</a></li>
@@ -493,9 +541,11 @@
 
     <section class="hero" id="inicio">
         <div class="floating-shapes">
-            <div class="shape"></div>
-            <div class="shape"></div>
-            <div class="shape"></div>
+            <div class="shape">☁️</div>
+            <div class="shape">☁️</div>
+            <div class="shape">☁️</div>
+            <div class="shape">☁️</div>
+            <div class="shape">☁️</div>
         </div>
         <div class="hero-content">
             <h1>Nubelombia</h1>
@@ -526,8 +576,7 @@
         <div class="container">
             <div class="about-content fade-in">
                 <div class="profile-image">
-                    TU FOTO
-                </div>
+                <img src="images/lucia.PNG" alt="Fundador Nubelombia" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">                </div>
                 <div class="about-text">
                     <h2>Nuestra Historia</h2>
                     <p>Nubelombia nació de la visión de democratizar el acceso a las tecnologías en la nube en Colombia. Fundada con el propósito de brindar soluciones innovadoras y accesibles, hemos crecido como una empresa comprometida con la transformación digital del país.</p>

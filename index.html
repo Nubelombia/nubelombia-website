@@ -209,6 +209,14 @@
             100% { transform: translateX(0); opacity: 1; }
         }
 
+        @keyframes slideOutToRight {
+            0% { transform: translateX(0); opacity: 1; }
+            100% { transform: translateX(100%); opacity: 0; }
+       }
+       .notification {
+             animation: slideInFromRight 0.3s ease-out;
+        }
+
         @keyframes slideInFromBottom {
             0% { transform: translateY(100px); opacity: 0; }
             100% { transform: translateY(0); opacity: 1; }
@@ -501,6 +509,17 @@
             box-shadow: 0 8px 15px rgba(0, 212, 255, 0.3);
         }
 
+        /* Estados del botón de envío */
+        .submit-btn:disabled {
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .submit-btn:disabled:hover {
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .hero-content h1 { font-size: 2.5rem; }
@@ -763,24 +782,96 @@
                 window.open(posts[postId], '_blank');
             }
         }
-        function handleSubmit(event) {
-            event.preventDefault();
-            
-            const formData = new FormData(event.target);
-            const data = {
-                name: formData.get('name'),
-                email: formData.get('email'),
-                company: formData.get('company'),
-                message: formData.get('message')
-            };
-            
-            // Aquí puedes integrar con tu backend o servicio de email
-            console.log('Datos del formulario:', data);
-            alert('¡Gracias por tu mensaje! Te contactaremos pronto.');
-            
-            // Reset form
+        async function handleSubmit(event) {
+    event.preventDefault();
+    
+    const submitBtn = event.target.querySelector('.submit-btn');
+    const originalText = submitBtn.textContent;
+    
+    // Mostrar estado de carga
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Enviando...';
+    submitBtn.style.opacity = '0.7';
+    
+    try {
+        const formData = new FormData(event.target);
+        const data = {
+            name: formData.get('name'),
+            email: formData.get('email'),
+            phone: formData.get('company'), // Usando company como phone por compatibilidad
+            message: formData.get('message'),
+            subject: 'Contacto desde Nubelombia.com'
+        };
+        
+        console.log('Enviando datos:', data);
+        
+        const response = await fetch('/api/contact', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        });
+        
+        const result = await response.json();
+        console.log('Respuesta del servidor:', result);
+        
+        if (response.ok && result.success) {
+            // Mostrar mensaje de éxito
+            showNotification('¡Mensaje enviado exitosamente! Te contactaremos pronto.', 'success');
             event.target.reset();
+        } else {
+            throw new Error(result.error || 'Error enviando el mensaje');
         }
+        
+    } catch (error) {
+        console.error('Error:', error);
+        showNotification('Error enviando el mensaje. Por favor intenta nuevamente.', 'error');
+    } finally {
+        // Restaurar botón
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+        submitBtn.style.opacity = '1';
+    }
+}
+
+// Función para mostrar notificaciones
+function showNotification(message, type = 'info') {
+    // Remover notificación existente
+    const existingNotification = document.querySelector('.notification');
+    if (existingNotification) {
+        existingNotification.remove();
+    }
+    
+    // Crear nueva notificación
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.textContent = message;
+    
+    // Estilos para la notificación
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 15px 20px;
+        border-radius: 8px;
+        color: white;
+        font-weight: bold;
+        z-index: 10000;
+        max-width: 300px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        animation: slideInFromRight 0.3s ease-out;
+        background: ${type === 'success' ? '#00d4ff' : '#ff4757'};
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Auto-remover después de 5 segundos
+    setTimeout(() => {
+        notification.style.animation = 'slideOutToRight 0.3s ease-in';
+        setTimeout(() => notification.remove(), 300);
+    }, 5000);
+}
 
         // Dynamic navbar background
         window.addEventListener('scroll', () => {

@@ -535,7 +535,51 @@
             .contact-btn { flex-direction: column; text-align: center; gap: 1rem; }
             .btn-content { text-align: center; }
         }
+/* Footer */
+        .footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 3rem 2rem 1rem;
+            text-align: center;
+        }
 
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+
+        .footer-text {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            color: #00d4ff;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1rem;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
         /* Scroll animations */
         .fade-in {
             opacity: 0;
@@ -549,6 +593,7 @@
         }
     </style>
 </head>
+
 <body>
     <nav>
         <div class="nav-container">
@@ -611,9 +656,9 @@
                     <p>Nos especializamos en tecnologías de frontera: inteligencia artificial, cloud computing y desarrollo de software de vanguardia. Creemos que el talento no tiene fronteras, y trabajamos para que las mejores oportunidades lleguen a los mejores profesionales, sin importar su ubicación geográfica.</p>
                     
                     <div class="social-links">
-                        <a href="https://youtube.com/@nubelombia" class="social-link youtube" target="_blank" title="YouTube">:yt:</a>
-                        <a href="https://github.com/nubelombia" class="social-link github" target="_blank" title="GitHub">💻</a>
-                        <a href="https://instagram.com/nubelombia" class="social-link instagram" target="_blank" title="Instagram">📷</a>
+                        <a href="https://youtube.com/@nubelombia" class="social-link youtube" target="_blank" title="YouTube"><span>▶</span> YouTube</a>
+                        <a href="https://github.com/nubelombia" class="social-link github" target="_blank" title="GitHub"><span>&lt;/&gt;</span> GitHub</a>
+                        <a href="https://instagram.com/nubelombia" class="social-link instagram" target="_blank" title="Instagram"><span>◐</span> Instagram</a>
                     </div>
                 </div>
             </div>
@@ -669,7 +714,8 @@
             </div>
         </div>
     </section>
-<footer class="footer">
+
+    <footer class="footer">
         <div class="footer-content">
                 <span>Nubelombia</span>
             </div>
@@ -688,6 +734,7 @@
             </div>
         </div>
     </footer>
+
     <script>
         // Scroll animations
         const observerOptions = {

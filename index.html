@@ -463,61 +463,62 @@
             margin-bottom: 2rem;
         }
 
-        .contact-form {
-            max-width: 600px;
+        .contact-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 800px;
             margin: 0 auto;
+            padding: 2rem 0;
         }
 
-        .form-group {
-            margin-bottom: 1.5rem;
-            text-align: left;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-        }
-
-        .form-group textarea {
-            height: 120px;
-            resize: vertical;
-        }
-
-        .submit-btn {
-            background: #00d4ff;
+        .contact-btn {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            text-decoration: none;
             color: white;
-            padding: 12px 30px;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: bold;
             transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
         }
 
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 15px rgba(0, 212, 255, 0.3);
+        .contact-btn:hover {
+            transform: translateY(-5px);
+            border-color: #00d4ff;
+            box-shadow: 0 15px 30px rgba(0, 212, 255, 0.2);
+            background: rgba(0, 212, 255, 0.1);
         }
 
-        /* Estados del botón de envío */
-        .submit-btn:disabled {
-            cursor: not-allowed;
-            transform: none !important;
+        .btn-icon {
+            font-size: 3rem;
+            min-width: 80px;
         }
 
-        .submit-btn:disabled:hover {
-            transform: none !important;
-            box-shadow: none !important;
+        .btn-content {
+            text-align: left;
+            flex: 1;
+        }
+
+        .btn-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: #00d4ff;
+        }
+
+        .btn-content p {
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .btn-email {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-family: 'Courier New', monospace;
         }
 
         /* Responsive */
@@ -526,6 +527,9 @@
             .about-content { grid-template-columns: 1fr; }
             .nav-links { display: none; }
             .profile-image { width: 250px; height: 250px; }
+            .contact-buttons { grid-template-columns: 1fr; }
+            .contact-btn { flex-direction: column; text-align: center; gap: 1rem; }
+            .btn-content { text-align: center; }
         }
 
         /* Scroll animations */
@@ -612,45 +616,6 @@
         </div>
     </section>
 
-<!--     <section class="blog" id="blog">
-        <div class="container">
-            <h2 class="fade-in">Blog y Recursos</h2>
-            <div class="blog-grid">
-                <div class="blog-card fade-in" onclick="openBlogPost('azure-basics')">
-                    <div class="blog-image">
-                        🚀 Azure Basics
-                    </div>
-                    <div class="blog-content">
-                        <h3>Primeros pasos con Microsoft Azure</h3>
-                        <p>Aprende los fundamentos de Azure y cómo crear tu primera aplicación en la nube.</p>
-                        <div class="blog-date">Publicado hace 2 días</div>
-                    </div>
-                </div>
-                
-                <div class="blog-card fade-in" onclick="openBlogPost('devops-guide')">
-                    <div class="blog-image">
-                        ⚙️ DevOps Guide
-                    </div>
-                    <div class="blog-content">
-                        <h3>Guía completa de DevOps en la nube</h3>
-                        <p>Implementa CI/CD pipelines eficientes con Azure DevOps y GitHub Actions.</p>
-                        <div class="blog-date">Publicado hace 1 semana</div>
-                    </div>
-                </div>
-                
-                <div class="blog-card fade-in" onclick="openBlogPost('security-best')">
-                    <div class="blog-image">
-                        🛡️ Security Best
-                    </div>
-                    <div class="blog-content">
-                        <h3>Mejores prácticas de seguridad</h3>
-                        <p>Protege tus aplicaciones en la nube con estas estrategias probadas.</p>
-                        <div class="blog-date">Publicado hace 2 semanas</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>  -->
     
     <section class="education" id="education">
         <div class="container">
@@ -681,25 +646,23 @@
             <h2 class="fade-in">¿Listo para innovar juntos?</h2>
             <p class="fade-in">Contáctanos y descubre cómo podemos impulsar tu proyecto al siguiente nivel</p>
             
-            <form class="contact-form fade-in" onsubmit="handleSubmit(event)">
-                <div class="form-group">
-                    <label for="name">Nombre</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="company">Empresa</label>
-                    <input type="text" id="company" name="company">
-                </div>
-                <div class="form-group">
-                    <label for="message">Mensaje</label>
-                    <textarea id="message" name="message" placeholder="Cuéntanos sobre tu proyecto..." required></textarea>
-                </div>
-                <button type="submit" class="submit-btn">Enviar Mensaje</button>
-            </form>
+            <div class="contact-buttons fade-in">
+                <a href="mailto:lucia@nubelombia.com?subject=Consulta sobre Soluciones Empresariales" class="contact-btn enterprise">
+                    <div class="btn-icon">🏢</div>
+                    <div class="btn-content">
+                        <h3>Soluciones Empresariales</h3>
+                        <p>Para empresas que buscan transformación digital</p>
+                    </div>
+                </a>
+                
+                <a href="mailto:nubelombia@gmail.com?subject=Interés en Colaborar con Nubelombia" class="contact-btn collaboration">
+                    <div class="btn-icon">🤝</div>
+                    <div class="btn-content">
+                        <h3>Trabajo con Nosotros</h3>
+                        <p>Para profesionales interesados en colaborar</p>
+                    </div>
+                </a>
+            </div>
         </div>
     </section>
 
@@ -782,96 +745,6 @@
                 window.open(posts[postId], '_blank');
             }
         }
-        async function handleSubmit(event) {
-    event.preventDefault();
-    
-    const submitBtn = event.target.querySelector('.submit-btn');
-    const originalText = submitBtn.textContent;
-    
-    // Mostrar estado de carga
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Enviando...';
-    submitBtn.style.opacity = '0.7';
-    
-    try {
-        const formData = new FormData(event.target);
-        const data = {
-            name: formData.get('name'),
-            email: formData.get('email'),
-            phone: formData.get('company'), // Usando company como phone por compatibilidad
-            message: formData.get('message'),
-            subject: 'Contacto desde Nubelombia.com'
-        };
-        
-        console.log('Enviando datos:', data);
-        
-        const response = await fetch('/api/contact', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-        });
-        
-        const result = await response.json();
-        console.log('Respuesta del servidor:', result);
-        
-        if (response.ok && result.success) {
-            // Mostrar mensaje de éxito
-            showNotification('¡Mensaje enviado exitosamente! Te contactaremos pronto.', 'success');
-            event.target.reset();
-        } else {
-            throw new Error(result.error || 'Error enviando el mensaje');
-        }
-        
-    } catch (error) {
-        console.error('Error:', error);
-        showNotification('Error enviando el mensaje. Por favor intenta nuevamente.', 'error');
-    } finally {
-        // Restaurar botón
-        submitBtn.disabled = false;
-        submitBtn.textContent = originalText;
-        submitBtn.style.opacity = '1';
-    }
-}
-
-// Función para mostrar notificaciones
-function showNotification(message, type = 'info') {
-    // Remover notificación existente
-    const existingNotification = document.querySelector('.notification');
-    if (existingNotification) {
-        existingNotification.remove();
-    }
-    
-    // Crear nueva notificación
-    const notification = document.createElement('div');
-    notification.className = `notification ${type}`;
-    notification.textContent = message;
-    
-    // Estilos para la notificación
-    notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        padding: 15px 20px;
-        border-radius: 8px;
-        color: white;
-        font-weight: bold;
-        z-index: 10000;
-        max-width: 300px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        animation: slideInFromRight 0.3s ease-out;
-        background: ${type === 'success' ? '#00d4ff' : '#ff4757'};
-    `;
-    
-    document.body.appendChild(notification);
-    
-    // Auto-remover después de 5 segundos
-    setTimeout(() => {
-        notification.style.animation = 'slideOutToRight 0.3s ease-in';
-        setTimeout(() => notification.remove(), 300);
-    }, 5000);
-}
 
         // Dynamic navbar background
         window.addEventListener('scroll', () => {

@@ -390,17 +390,18 @@
         }
 
         .social-link {
-            display: inline-block;
-            padding: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 10px 16px;
             background: #333;
             color: white;
             text-decoration: none;
-            border-radius: 50%;
+            border-radius: 25px;
             transition: all 0.3s ease;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
+            font-size: 0.9rem;
+            font-weight: 500;
+            min-width: 100px;
             justify-content: center;
         }
 
@@ -409,9 +410,12 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
-        .social-link.youtube:hover { background: #ff0000; }
-        .social-link.github:hover { background: #333; }
-        .social-link.instagram:hover { background: #e4405f; }
+        .social-link.youtube:hover { background: #ff0000; 
+            box-shadow: 0 10px 20px rgba(255, 0, 0, 0.3);}
+        .social-link.github:hover { background: #6e5494; 
+            box-shadow: 0 10px 20px rgba(110, 84, 148, 0.3); }
+        .social-link.instagram:hover { background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
+            box-shadow: 0 10px 20px rgba(188, 24, 136, 0.3); }
 
         /* Education Section */
         .education {
@@ -665,7 +669,25 @@
             </div>
         </div>
     </section>
-
+<footer class="footer">
+        <div class="footer-content">
+                <span>Nubelombia</span>
+            </div>
+            <p class="footer-text">Conectando el mejor talento latinoamericano con oportunidades globales en tecnología</p>
+            
+            <div class="footer-links">
+                <a href="#about">Sobre Nosotros</a>
+                <a href="#specialties">Especialidades</a>
+                <a href="#contact">Contacto</a>
+                <a href="/legal" target="_blank">Información Legal</a>
+                <a href="/privacy" target="_blank">Política de Privacidad</a>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 © Nubelombia. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
     <script>
         // Scroll animations
         const observerOptions = {

@@ -604,8 +604,7 @@
             <ul class="nav-links">
                 <li><a href="#inicio">Inicio</a></li>
                 <li><a href="#about">Nosotros</a></li>
-                <li><a href="#blog">Blog</a></li>
-                <li><a href="#education">Cursos</a></li>
+                <li><a href="#education">Aprende</a></li>
                 <li><a href="#contact">Contacto</a></li>
             </ul>
         </div>
@@ -707,7 +706,7 @@
                 <a href="mailto:nubelombia@gmail.com?subject=Interés en Colaborar con Nubelombia" class="contact-btn collaboration">
                     <div class="btn-icon">🤝</div>
                     <div class="btn-content">
-                        <h3>Trabajo con Nosotros</h3>
+                        <h3>Trabaja con Nosotros</h3>
                         <p>Para profesionales interesados en colaborar</p>
                     </div>
                 </a>
@@ -814,16 +813,94 @@
                 window.open(posts[postId], '_blank');
             }
         }
+// Dynamic navbar background with time-based colors
+        function updateNavbarByTime() {
+            const nav = document.querySelector('nav');
+            const hour = new Date().getHours();
+            
+            let backgroundColor, borderColor;
+            
+            if (hour >= 6 && hour < 12) {
+                // Mañana: Amarillo mantequilla
+                backgroundColor = 'rgba(255, 248, 220, 0.95)';
+                borderColor = 'rgba(255, 193, 7, 0.3)';
+            } else if (hour >= 12 && hour < 18) {
+                // Tarde: Amarillo mantequilla más intenso
+                backgroundColor = 'rgba(255, 243, 205, 0.95)';
+                borderColor = 'rgba(255, 152, 0, 0.3)';
+            } else if (hour >= 18 && hour < 21) {
+                // Atardecer: Tonos naranjas/rojizos suaves
+                backgroundColor = 'rgba(255, 235, 205, 0.95)';
+                borderColor = 'rgba(255, 140, 0, 0.4)';
+            } else {
+                // Noche: Azul oscuro/negro
+                backgroundColor = 'rgba(25, 42, 86, 0.95)';
+                borderColor = 'rgba(100, 149, 237, 0.3)';
+                
+                // Cambiar color de texto para la noche
+                const navLinks = document.querySelectorAll('.nav-links a');
+                navLinks.forEach(link => {
+                    link.style.color = '#e8f4fd';
+                });
+                
+                // Cambiar color del logo para la noche
+                const logo = document.querySelector('.logo');
+                logo.style.color = '#87ceeb';
+                
+                return; // Salir temprano para no aplicar colores de día
+            }
+            
+            // Aplicar colores de día
+            nav.style.background = backgroundColor;
+            nav.style.borderBottom = `1px solid ${borderColor}`;
+            
+            // Restaurar colores de texto para el día
+            const navLinks = document.querySelectorAll('.nav-links a');
+            navLinks.forEach(link => {
+                link.style.color = '#2c3e50';
+            });
+            
+            const logo = document.querySelector('.logo');
+            logo.style.color = '#00d4ff';
+        }
 
-        // Dynamic navbar background
+        // Actualizar colores al cargar la página
+        updateNavbarByTime();
+        
+        // Actualizar cada minuto
+        setInterval(updateNavbarByTime, 60000);
+
         window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            const hour = new Date().getHours();
+            
+            if (window.scrollY > 100) {
+                if (hour >= 21 || hour < 6) {
+                    nav.style.background = 'rgba(25, 42, 86, 0.98)';
+                    nav.style.borderBottom = '1px solid rgba(100, 149, 237, 0.4)';
+                } else if (hour >= 6 && hour < 12) {
+                    nav.style.background = 'rgba(255, 248, 220, 0.98)';
+                    nav.style.borderBottom = '1px solid rgba(255, 193, 7, 0.4)';
+                } else if (hour >= 12 && hour < 18) {
+                    nav.style.background = 'rgba(255, 243, 205, 0.98)';
+                    nav.style.borderBottom = '1px solid rgba(255, 152, 0, 0.4)';
+                } else {
+                    nav.style.background = 'rgba(255, 235, 205, 0.98)';
+                    nav.style.borderBottom = '1px solid rgba(255, 140, 0, 0.5)';
+                }
+            } else {
+                updateNavbarByTime();
+            }
+        });
+        // Dynamic navbar background
+        /* window.addEventListener('scroll', () => {
             const nav = document.querySelector('nav');
             if (window.scrollY > 100) {
                 nav.style.background = 'rgba(0, 0, 0, 0.95)';
             } else {
                 nav.style.background = 'rgba(0, 0, 0, 0.9)';
             }
-        });
+        }); */
     </script>
 </body>
 </html>

@@ -29,6 +29,8 @@
             z-index: 1000;
             padding: 1rem 0;
             transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
         }
 
         .nav-container {
@@ -77,13 +79,49 @@
         }
 
         .nav-links a {
-            color: white;
+            color: #2c3e50;
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 8px;
+            position: relative;
         }
 
         .nav-links a:hover {
-            color: #00d4ff;
+            color: #0077be;
+            transform: translateY(-2px) scale(1.05);
+            text-shadow: 0 2px 4px rgba(0, 119, 190, 0.3);
+            background: rgba(0, 119, 190, 0.1);
+            box-shadow: 0 4px 12px rgba(0, 119, 190, 0.2);
+        }
+
+        /* Botón de modo oscuro */
+        .dark-mode-toggle {
+            background: none;
+            border: 2px solid #2c3e50;
+            border-radius: 20px;
+            padding: 8px 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #2c3e50;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-left: 1rem;
+        }
+
+        .dark-mode-toggle:hover {
+            background: #2c3e50;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(44, 62, 80, 0.3);
+        }
+
+        .dark-mode-icon {
+            font-size: 16px;
         }
 
         /* Hero Section */
@@ -530,6 +568,7 @@
             .hero-content h1 { font-size: 2.5rem; }
             .about-content { grid-template-columns: 1fr; }
             .nav-links { display: none; }
+            .dark-mode-toggle { margin-left: 0.5rem; font-size: 12px; padding: 6px 10px; }
             .profile-image { width: 250px; height: 250px; }
             .contact-buttons { grid-template-columns: 1fr; }
             .contact-btn { flex-direction: column; text-align: center; gap: 1rem; }
@@ -591,6 +630,108 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background: #1a1a2e;
+            color: #e8f4fd;
+        }
+
+        body.dark-mode .hero {
+            background: linear-gradient(135deg, #16213e 0%, #1a1a2e 100%);
+        }
+
+        body.dark-mode .video-background {
+            background: linear-gradient(135deg, rgba(22, 33, 62, 0.9) 0%, rgba(26, 26, 46, 0.9) 100%);
+        }
+
+        body.dark-mode .about {
+            background: #16213e;
+            color: #e8f4fd;
+        }
+
+        body.dark-mode .about-text h2 {
+            color: #87ceeb;
+        }
+
+        body.dark-mode .about-text p {
+            color: #b8c6db;
+        }
+
+        body.dark-mode .education {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+
+        body.dark-mode .education h2 {
+            color: #87ceeb;
+        }
+
+        body.dark-mode .education-card {
+            background: #2c3e50;
+            color: #e8f4fd;
+            border: 1px solid rgba(135, 206, 235, 0.2);
+        }
+
+        body.dark-mode .education-card h3 {
+            color: #87ceeb;
+        }
+
+        body.dark-mode .contact {
+            background: #0f1419;
+        }
+
+        body.dark-mode .footer {
+            background: #0a0e13;
+        }
+
+        body.dark-mode .footer-text {
+            color: rgba(232, 244, 253, 0.7);
+        }
+
+        body.dark-mode .footer-links a {
+            color: rgba(232, 244, 253, 0.6);
+        }
+
+        body.dark-mode .footer-links a:hover {
+            color: #87ceeb;
+        }
+
+        body.dark-mode .footer-bottom {
+            border-top: 1px solid rgba(232, 244, 253, 0.1);
+            color: rgba(232, 244, 253, 0.5);
+        }
+
+        body.dark-mode .profile-image {
+            background: linear-gradient(45deg, #87ceeb, #4a90e2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        body.dark-mode .cta-button {
+            background: #4a90e2;
+        }
+
+        body.dark-mode .cta-button:hover {
+            background: #87ceeb;
+            box-shadow: 0 10px 20px rgba(135, 206, 235, 0.3);
+        }
+
+        body.dark-mode .play-button {
+            border-color: #87ceeb;
+        }
+
+        body.dark-mode .play-button:hover {
+            background: rgba(135, 206, 235, 0.3);
+        }
+
+        body.dark-mode .contact-btn:hover {
+            border-color: #87ceeb;
+            box-shadow: 0 15px 30px rgba(135, 206, 235, 0.2);
+            background: rgba(135, 206, 235, 0.1);
+        }
+
+        body.dark-mode .btn-content h3 {
+            color: #87ceeb;
+        }
     </style>
 </head>
 
@@ -607,6 +748,10 @@
                 <li><a href="https://github.com/nubelombia/recursos-educativos" target ="_blank">Aprende</a></li>
                 <li><a href="#contact">Contacto</a></li>
             </ul>
+            <button class="dark-mode-toggle" onclick="toggleDarkMode()">
+                <span class="dark-mode-icon">🌙</span>
+                <span class="dark-mode-text">Modo Oscuro</span>
+            </button>
         </div>
     </nav>
 
@@ -813,8 +958,85 @@
                 window.open(posts[postId], '_blank');
             }
         }
-// Dynamic navbar background with time-based colors
+        // Variable para controlar el modo oscuro
+        let isDarkMode = localStorage.getItem('darkMode') === 'true';
+
+        // Función para alternar modo oscuro
+        function toggleDarkMode() {
+            isDarkMode = !isDarkMode;
+            localStorage.setItem('darkMode', isDarkMode);
+            
+            const toggleButton = document.querySelector('.dark-mode-toggle');
+            const icon = document.querySelector('.dark-mode-icon');
+            const text = document.querySelector('.dark-mode-text');
+            const body = document.body;
+            
+            if (isDarkMode) {
+                // Aplicar modo oscuro a todo el sitio
+                body.classList.add('dark-mode');
+                
+                // Aplicar modo oscuro a la navegación
+                document.querySelector('nav').style.background = 'rgba(25, 42, 86, 0.95)';
+                document.querySelector('nav').style.borderBottom = '1px solid rgba(100, 149, 237, 0.3)';
+                
+                // Cambiar colores de navegación
+                document.querySelectorAll('.nav-links a').forEach(link => {
+                    link.style.color = '#e8f4fd';
+                });
+                
+                document.querySelector('.logo').style.color = '#87ceeb';
+                
+                // Cambiar botón
+                toggleButton.style.borderColor = '#87ceeb';
+                toggleButton.style.color = '#87ceeb';
+                icon.textContent = '☀️';
+                text.textContent = 'Modo Claro';
+                
+                toggleButton.addEventListener('mouseenter', function() {
+                    this.style.background = '#87ceeb';
+                    this.style.color = '#1a2a56';
+                });
+                
+                toggleButton.addEventListener('mouseleave', function() {
+                    this.style.background = 'none';
+                    this.style.color = '#87ceeb';
+                });
+                
+            } else {
+                // Remover modo oscuro de todo el sitio
+                body.classList.remove('dark-mode');
+                
+                // Restaurar modo automático por hora
+                updateNavbarByTime();
+                
+                // Cambiar botón
+                toggleButton.style.borderColor = '#2c3e50';
+                toggleButton.style.color = '#2c3e50';
+                icon.textContent = '🌙';
+                text.textContent = 'Modo Oscuro';
+                
+                toggleButton.addEventListener('mouseenter', function() {
+                    this.style.background = '#2c3e50';
+                    this.style.color = 'white';
+                });
+                
+                toggleButton.addEventListener('mouseleave', function() {
+                    this.style.background = 'none';
+                    this.style.color = '#2c3e50';
+                });
+            }
+        }
+
+        // Aplicar modo oscuro al cargar si estaba activado
+        if (isDarkMode) {
+            setTimeout(toggleDarkMode, 100);
+        }
+
+        // Dynamic navbar background with time-based colors
         function updateNavbarByTime() {
+            // No aplicar cambios automáticos si está en modo oscuro manual
+            if (isDarkMode) return;
+
             const nav = document.querySelector('nav');
             const hour = new Date().getHours();
             
@@ -871,6 +1093,9 @@
         setInterval(updateNavbarByTime, 60000);
 
         window.addEventListener('scroll', () => {
+            // No aplicar cambios de scroll si está en modo oscuro manual
+            if (isDarkMode) return;
+
             const nav = document.querySelector('nav');
             const hour = new Date().getHours();
             
@@ -892,15 +1117,7 @@
                 updateNavbarByTime();
             }
         });
-        // Dynamic navbar background
-        /* window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 100) {
-                nav.style.background = 'rgba(0, 0, 0, 0.95)';
-            } else {
-                nav.style.background = 'rgba(0, 0, 0, 0.9)';
-            }
-        }); */
+
     </script>
 </body>
 </html>
